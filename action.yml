@@ -3,7 +3,7 @@ description: 'Create a repository dispatch event'
 inputs:
   token:
     description: 'A repo scoped GitHub Personal Access Token'
-    required: true
+    required: false
   repository:
     description: 'The full name of the repository to send the dispatch.'
     default: ${{ github.repository }}
@@ -13,6 +13,12 @@ inputs:
   client-payload:
     description: 'JSON payload with extra information about the webhook event that your action or worklow may use.'
     default: '{}'
+  client-id:
+    description: 'A GitHub OAuth Client ID'
+    required: false
+  client-secret:
+    description: 'A GitHub OAuth Client Secret'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
