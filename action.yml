@@ -11,13 +11,19 @@ inputs:
     description: 'A custom webhook event name.'
     required: true
   client-payload:
-    description: 'JSON payload with extra information about the webhook event that your action or worklow may use.'
+    description: 'JSON payload with extra information about the webhook event that your action or workflow may use.'
     default: '{}'
   client-id:
-    description: 'A GitHub OAuth Client ID'
+    description: 'A GitHub App Client ID'
     required: false
   client-secret:
-    description: 'A GitHub OAuth Client Secret'
+    description: 'A GitHub App Client Secret'
+    required: false
+  app-id:
+    description: 'A GitHub App ID'
+    required: false
+  app-key:
+    description: 'A private key assigned to the GitHub app'
     required: false
 runs:
   using: 'node12'

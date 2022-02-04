@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import {createOAuthAppAuth} from '@octokit/auth-oauth-app'
+import {createAppAuth} from '@octokit/auth-app'
 import {Octokit} from '@octokit/rest'
 import {inspect} from 'util'
 
@@ -11,6 +11,8 @@ async function run(): Promise<void> {
       repository: core.getInput('repository'),
       eventType: core.getInput('event-type'),
       clientPayload: core.getInput('client-payload'),
+      appID: core.getInput('app-id'),
+      appKey: core.getInput('app-key'),
       clientID: core.getInput('client-id'),
       clientSecret: core.getInput('client-secret')
     }
@@ -23,8 +25,10 @@ async function run(): Promise<void> {
         return github.getOctokit(inputs.token)
       } else if (inputs.clientID !== '' && inputs.clientSecret !== '') {
         return new Octokit({
-          authStrategy: createOAuthAppAuth,
+          authStrategy: createAppAuth,
           auth: {
+            appId: inputs.appID,
+            privateKey: inputs.appKey,
             clientId: inputs.clientID,
             clientSecret: inputs.clientSecret
           }
